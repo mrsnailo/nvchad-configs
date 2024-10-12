@@ -1,0 +1,40 @@
+-- To find any highlight groups: "<cmd> Telescope highlights"
+-- Each highlight group can take a table with variables fg, bg, bold, italic, etc
+-- base30 variable names can also be used as colors
+
+local M = {}
+
+---@type Base46HLGroupsList
+M.override = {
+  Comment = {
+    italic = true,
+  },
+  Folded = {
+    bg = "NONE",
+    fg = "teal",
+  }
+}
+
+---@type HLTable
+M.add = {
+  NvimTreeOpenedFolderName = { fg = "green", bold = true },
+  FoldColumn = {
+    fg = "teal",
+    bg = "NONE",
+    bold = true,
+    sp = "NONE"
+  },
+  VirtColumn = {
+    fg="lightbg"
+  },
+  StCcIcon= {
+    fg = "black",
+    bg = "pink"
+  },
+  StCcText = {
+    fg = "pink",
+    bg = "#262a2f"
+  }
+}
+
+return M
