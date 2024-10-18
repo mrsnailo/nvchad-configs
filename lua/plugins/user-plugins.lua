@@ -99,6 +99,9 @@ local plugins = {
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
+    config = function()
+      require "configs.lazygit"
+    end,
   },
 
   { "f-person/git-blame.nvim", lazy = false },
