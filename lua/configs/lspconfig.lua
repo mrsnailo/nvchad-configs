@@ -3,18 +3,17 @@ require("nvchad.configs.lspconfig").defaults()
 
 local lspconfig = require "lspconfig"
 
-local servers = { "html", "cssls", "ts_ls" }
+local servers = { "html", "cssls", "ts_ls"}
 local nvlsp = require "nvchad.configs.lspconfig"
 nvlsp.defaults()
 
-lspconfig.ts_ls.setup{
-  require'lspconfig'.ts_ls.setup{
+lspconfig.ts_ls.setup {
   init_options = {
     plugins = {
       {
         name = "@vue/typescript-plugin",
         location = "/usr/local/lib/node_modules/@vue/typescript-plugin",
-        languages = {"javascript", "typescript", "vue"},
+        languages = { "javascript", "typescript", "vue" },
       },
     },
   },
@@ -23,11 +22,10 @@ lspconfig.ts_ls.setup{
     "typescript",
     "vue",
   },
-}
 
--- You must make sure volar is setup
--- e.g. require'lspconfig'.volar.setup{}
--- See volar's section for more information
+  -- You must make sure volar is setup
+  -- e.g. require'lspconfig'.volar.setup{}
+  -- See volar's section for more information
 }
 
 -- emmet ls setup
@@ -58,7 +56,14 @@ lspconfig.emmet_ls.setup {
   -- },
   -- }
 }
-
+-- MarksMan
+lspconfig.marksman.setup {
+  on_attach = nvlsp.on_attach,
+  capabilities = nvlsp.capabilities,
+  cmd = { "marksman", "server" },
+  filetypes = { "markdown", "markdown.mdx" },
+  single_file_support = true,
+}
 --tailwindcss
 lspconfig.tailwindcss.setup {
   capabilities = nvlsp.capabilities,

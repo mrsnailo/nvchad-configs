@@ -85,6 +85,7 @@ local plugins = {
 
   -- git
   { "tpope/vim-fugitive", lazy = false },
+
   {
     "kdheepak/lazygit.nvim",
     lazy = true,
