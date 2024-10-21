@@ -8,6 +8,10 @@ local createCommand = vim.api.nvim_create_user_command
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
 
+-- copy lines up/down  
+map("n", "<S-A-Down>", "yyp", { desc = "Copy line down"})
+
+
 -- Move lines up/down
 map("n", "<A-Down>", ":m .+1<CR>", { desc = "Move line down" })
 map("n", "<A-j>", ":m .+1<CR>", { desc = "Move line down" })
@@ -22,8 +26,8 @@ map("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move line down" })
 map("v", "<A-Up>", ":m '<-2<CR>gv=gv", { desc = "Move line up" })
 map("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move line up" })
 
--- lazygit
 
+-- lazygit
 map("n", "<leader>lg", "<cmd>LazyGit<cr>", { desc = "LazyGit" })
 
 -- aliases to bypass  shift key typos 
