@@ -3,6 +3,7 @@ require "nvchad.mappings"
 -- add yours here
 
 local map = vim.keymap.set
+local createCommand = vim.api.nvim_create_user_command
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
@@ -25,3 +26,6 @@ map("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move line up" })
 
 map("n", "<leader>lg", "<cmd>LazyGit<cr>", { desc = "LazyGit" })
 
+-- aliases to bypass  shift key typos 
+createCommand('Qa', 'qa', { desc = "Quit all"})
+createCommand('Wqa', 'wa', { desc = "Save and Quit all"})
