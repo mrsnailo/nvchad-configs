@@ -4,43 +4,6 @@ if not status_ok then
 end
 
 noice.setup {
-  -- views = {
-  --   cmdline_popup = {
-  --     position = {
-  --       row = "40%",
-  --       col = "50%",
-  --     },
-  --     size = {
-  --       width = 90,
-  --       height = "auto",
-  --     },
-  --     border = {
-  --       style = "rounded",
-  --       padding = { 0, 1 },
-  --     },
-  --     win_options = {
-  --       winhighlight = { Normal = "Normal", FloatBorder = "DiagnosticInfo" },
-  --     },
-  --   },
-  --   popupmenu = {
-  --     relative = "editor",
-  --     position = {
-  --       row = "50%",
-  --       col = "50%",
-  --     },
-  --     size = {
-  --       width = 60,
-  --       height = 10,
-  --     },
-  --     border = {
-  --       style = "rounded",
-  --       padding = { 0, 1 },
-  --     },
-  --     win_options = {
-  --       winhighlight = { Normal = "Normal", FloatBorder = "DiagnosticInfo" },
-  --     },
-  --   },
-  -- },
   cmdline = {
     format = {
       cmdline = { pattern = "^:", icon = "", lang = "vim" },
@@ -49,7 +12,7 @@ noice.setup {
       filter = { pattern = "^:%s*!", icon = "", lang = "bash" },
       lua = { pattern = "^:%s*lua%s+", icon = "", lang = "lua" },
       help = { pattern = "^:%s*he?l?p?%s+", icon = "" },
-      input = {  }, -- Used by input()
+      input = {}, -- Used by input()
     },
   },
   messages = {
@@ -61,7 +24,7 @@ noice.setup {
     view_search = false,
   },
   lsp = {
-    progress = { enabled = false },
+    progress = { enabled = true },
     -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
     override = {
       ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
