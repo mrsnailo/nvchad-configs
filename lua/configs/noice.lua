@@ -4,90 +4,39 @@ if not status_ok then
 end
 
 noice.setup {
-  -- views = {
-  --   cmdline_popup = {
-  --     position = {
-  --       row = "40%",
-  --       col = "50%",
-  --     },
-  --     size = {
-  --       width = 90,
-  --       height = "auto",
-  --     },
-  --     border = {
-  --       style = "rounded",
-  --       padding = { 0, 1 },
-  --     },
-  --     win_options = {
-  --       winhighlight = { Normal = "Normal", FloatBorder = "DiagnosticInfo" },
-  --     },
-  --   },
-  --   popupmenu = {
-  --     relative = "editor",
-  --     position = {
-  --       row = "50%",
-  --       col = "50%",
-  --     },
-  --     size = {
-  --       width = 60,
-  --       height = 10,
-  --     },
-  --     border = {
-  --       style = "rounded",
-  --       padding = { 0, 1 },
-  --     },
-  --     win_options = {
-  --       winhighlight = { Normal = "Normal", FloatBorder = "DiagnosticInfo" },
-  --     },
-  --   },
-  -- },
-  cmdline = {
-    format = {
-      cmdline = { pattern = "^:", icon = "", lang = "vim" },
-      search_down = { kind = "search", pattern = "^/", icon = " ", lang = "regex" },
-      search_up = { kind = "search", pattern = "^%?", icon = " ", lang = "regex" },
-      filter = { pattern = "^:%s*!", icon = "", lang = "bash" },
-      lua = { pattern = "^:%s*lua%s+", icon = "", lang = "lua" },
-      help = { pattern = "^:%s*he?l?p?%s+", icon = "" },
-      input = {  }, -- Used by input()
+  {
+    messages = {
+      enabled = true, -- enables the Noice messages UI
     },
-  },
-  messages = {
-    enabled = true,
-    view = "mini", -- redirect messages to mini
-    view_error = "notify",
-    view_warn = "notify",
-    view_history = "messages",
-    view_search = false,
-  },
-  lsp = {
-    progress = { enabled = false },
-    -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-    override = {
-      ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-      ["vim.lsp.util.stylize_markdown"] = true,
-      ["cmp.entry.get_documentation"] = true,
+    popupmenu = {
+      enabled = true, -- enables the Noice popupmenu UI
+      ---@type 'nui'|'cmp'
+      backend = "nui", -- backend to use to show regular cmdline completions
     },
-    hover = { view = "hover", enabled = false },
-    signature = { view = "hover", enabled = false },
-  },
-  -- you can enable a preset for easier configuration
-  presets = {
-    -- bottom_search = true, -- use a classic bottom cmdline for search
-    command_palette = false, -- position the cmdline and popupmenu together
-    long_message_to_split = true, -- long messages will be sent to a split
-    -- inc_rename = false, -- enables an input dialog for inc-rename.nvim
-    lsp_doc_border = true, -- add a border to hover docs and signature help
-  },
-
-  --notify
-  notify = {
-    -- Noice can be used as `vim.notify` so you can route any notification like other messages
-    -- Notification messages have their level and other properties set.
-    -- event is always "notify" and kind can be any log level as a string
-    -- The default routes will forward notifications to nvim-notify
-    -- Benefit of using Noice for this is the routing and consistent history view
-    enabled = true,
-    view = "notify",
+    ---@type NoiceRouteConfig
+    history = {
+      -- options for the message history that you get with `:Noice`
+      view = "split",
+      opts = { enter = true, format = "details" },
+      filter = { event = { "msg_show", "notify" }, ["not"] = { kind = { "search_count", "echo" } } },
+    },
+    notify = {
+      -- Noice can be used as `vim.notify` so you can route any notification like other messages
+      -- Notification messages have their level and other properties set.
+      -- event is always "notify" and kind can be any log level as a string
+      -- The default routes will forward notifications to nvim-notify
+      -- Benefit of using Noice for this is the routing and consistent history view
+      enabled = true,
+    },
+    lsp_progress = {
+      enabled = false,
+      -- Lsp Progress is formatted using the builtins for lsp_progress. See config.format.builtin
+      -- See the section on formatting for more details on how to customize.
+      --- @type NoiceFormat|string
+      format = "lsp_progress",
+      --- @type NoiceFormat|string
+      format_done = "lsp_progress_done",
+      throttle = 1000 / 30, -- frequency to update lsp progress message
+    },
   },
 }
